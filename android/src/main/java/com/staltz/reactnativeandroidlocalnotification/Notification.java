@@ -427,12 +427,11 @@ public class Notification {
     }
 
     private PendingIntent getContentIntent() {
-        String packageName = context.getApplicationContext().getPackageName();
-        Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
-        if (launchIntent != null) {
-            launchIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        }
-        return PendingIntent.getActivity(context, 0, launchIntent, 0);
+        Intent receiverEvent = new Intent(context, NotificationEventReceiver.class);
+        receiverEvent.putExtra(NotificationEventReceiver.NOTIFICATION_ID, id);
+        receiverEvent.putExtra(NotificationEventReceiver.PAYLOAD, attributes.payload);
+
+        return PendingIntent.getBroadcast(context, id, receiverEvent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private PendingIntent getScheduleNotificationIntent() {

@@ -75,6 +75,7 @@ var Notification = {
                                                                       initialSysNotificationPayload) {
                     if (initialSysNotificationId) {
                         var event = {
+                            id: initialSysNotificationId,
                             action: initialSysNotificationAction,
                             payload: JSON.parse(initialSysNotificationPayload)
                         }
