@@ -237,6 +237,7 @@ function decodeNativeNotification(attributes) {
 
 DeviceEventEmitter.addListener('sysModuleNotificationClick', function(e) {
     var event = {
+        id: e.notificationID,
         action: e.action,
         payload: JSON.parse(e.payload)
     }
